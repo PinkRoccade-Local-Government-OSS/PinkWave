@@ -1,0 +1,26 @@
+{
+  "tests" : [
+    {
+      "target" : "learnvuln.loc",
+      "exploits" : [
+        {
+          "exploits" : "exploits/sword/portscantcp.py",
+          "ports" : [80,443,22]
+        },
+        {
+          "exploits" : "exploits/sword/portscanudp.py",
+          "ports" : [53]
+        },
+        {
+          "exploits" : "exploits/sword/cookiesecureflag.py"
+        },
+        {
+          "exploits" : "exploits/sword/cookiehttponlyflag.py"
+        },
+        {
+          "exploits" : "exploits/sword/sslstripping.py"
+        }
+      ]
+    }
+  ]
+}

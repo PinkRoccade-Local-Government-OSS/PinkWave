@@ -1,0 +1,7 @@
+{
+  "browser" : "phantomjs",
+  "http-port" : 9000,
+  "timeout" : 7,
+  "debug" : false,
+  "ssl-verify" : true
+}

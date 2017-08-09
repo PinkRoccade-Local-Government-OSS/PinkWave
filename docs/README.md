@@ -1,0 +1,18 @@
+PinkWave Documentation
+===============
+
+The PinkWave documentation is written for administrators who want to use the tool to perform automated tests and for developers who want to contribute or write their own exploits.
+
+### For Administrators
+Learn how to automate security tests: 
+- [Automate tests](administrators/automate-tests.markdown)
+
+### For Developers
+Learn how to write/test security tests: 
+- [Write your first exploit](developers/write-exploits.markdown)
+- [Write your first macro](developers/write-macros.markdown)
+- [Setup a vulnerable environment](developers/testing-environment.markdown)
+
+### For Managers
+Learn how to read and find log files:
+- [Logging explained](managers/logging.markdown)

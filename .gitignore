@@ -1,0 +1,8 @@
+*.pyc
+*.swp
+private/*
+!private/__init__.py
+!private/macros/__init__.py
+drivers/*
+!drivers/README.md
+virtualenv/

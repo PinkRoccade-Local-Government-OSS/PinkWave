@@ -1,0 +1,5 @@
+PURPLE= '\033[1;35m'
+YELLOW= '\033[93m'
+RED= '\033[1;91m'
+GREEN = '\033[92m'
+COLOR_END='\033[1;m'

@@ -1,5 +1,5 @@
 
-<h2>For managers</h2>
+<h2>For administrators</h2>
 
 <h1 align="">Configure setting</h1>
 You can configure your settings in a JSON file in the config/config.json file.

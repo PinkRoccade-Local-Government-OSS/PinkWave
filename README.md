@@ -51,17 +51,77 @@ sudo visudo
 
 ## Usage
 
-Use pinkwave.py to show options for exploits or execute a single test.
+#### 1\. Execute manual test
+Use pinkwave.py to execute a single test. Use the exploit interface to view parameters for individuel scripts.  
 ```
-./pinkwave.py --help 
+./pinkwave.py -t [target] -e [exploit] [params]
 ```
 
-Use [automate.py](https://github.com/PinkRoccadeLG/pinkwave/blob/master/docs/administrators/automate-tests.markdown) to execute multiple tests with a [JSON file](https://github.com/PinkRoccadeLG/pinkwave/blob/master/docs/administrators/automate-tests.markdown).
-```
+#### 2\. Execute tests via JSON
+Use [automate.py](docs/administrators/automate-tests.markdown) to execute multiple tests with a [JSON file](docs/administrators/automate-tests.markdown).
+```/
 ./automate.py [pathToTestfile]
 ```
 
-## Examples
+#### 3\. Status interface (s)
+View status of the PinkWave tool and test the http-port for XSS audits and POST form generators: 
+```
+./pinkwave.py --status
+[*] PinkServer (HTTP server) starting on port: 9000
+
+
+             oo          dP                                             
+                         88                                             
+    88d888b. dP 88d888b. 88  .dP  dP  dP  dP .d8888b. dP   .dP .d8888b. 
+    88'  `88 88 88'  `88 88888"   88  88  88 88'  `88 88   d8' 88ooood8 
+    88.  .88 88 88    88 88  `8b. 88.88b.88' 88.  .88 88 .88'  88.  ... 
+    88Y888P' dP dP    dP dP   `YP 8888P Y8P  `88888P8 8888P'   `88888P' 
+    88                                                                  
+    dP                                                                  
+
+              -- -- +=[ 322 Payloads 
+              -- -- +=[ 17 Python Scripts 
+            [W] Make sure your current directory (pwd) is the same as pinkwave.py .
+            
+[^] Logger is up. http://localhost:9000/logger
+[^] Bouncer is up. http://localhost:9000/bouncer
+```
+
+#### 4\.  Exploit interface (-e)
+Use the -e parameter with a path to an exploit to display the parameters.
+
+```
+./pinkwave.py -e exploits/sword/sslstripping.py
+
+[exploits/sword/sqlinjection.py] > show parameters
+
+Exploit options (exploits/sword/sqlinjection.py)
+
+[--target] (Required) Remote target host
+[--requestNames] POST/GET names, comma seperated
+[--request] (optional) Specify request type (GET,POST or POST/DIRECT)
+```
+
+#### 5\. Macro interface (-m)
+```
+./pinkwave.py -m "examples/macros/logmein.py,examples/macros/searchforuser.py"
+[*] PinkServer (HTTP server) starting on port: 9000
+Logging in as admin before performing action
+Logged in!
+Searching for user Iron Man(1)...
+
+
+<tr>
+<td>1</td>
+<td>Iron</td>
+<td>Man</td>
+</tr>
+
+```
+
+
+
+## Examples of manual testing
 **Testing for SSL stripping**:
 ```
 ./pinkwave.py -t localhost -e exploits/sword/sslstripping.py

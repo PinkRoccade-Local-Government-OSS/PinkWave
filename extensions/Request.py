@@ -52,7 +52,7 @@ class Request:
         self.hash = None
         self.bytes = None
         self.time = None
-        self.content = None
+        self.text = None
         self.cookies = None
         self.url = None
 
@@ -65,9 +65,9 @@ class Request:
             raise Exception("Browser is not set for Request")
 
         self.hash = browser.hash()
-        self.bytes = len(browser.content())
+        self.bytes = len(browser.text())
         self.time = browser.time()
-        self.content = browser.content()
+        self.text = browser.text()
         self.cookies = browser.cookies()
         self.url = browser.url()
         self.created = True

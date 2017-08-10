@@ -150,7 +150,7 @@ def pinkwave_shell(argsDict = {},closeBrowser=True):
         browser.driver.delete_all_cookies()
         macros = Util.strToArray(sys.argv[2])
         for m in macros:
-            Macro().start(m,browser)
+            Macro(m).start()
     # Status command
     elif isStatusInterface():
         # Display pinkwave/server status

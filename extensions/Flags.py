@@ -30,7 +30,7 @@ class Flags:
 
     def containsKeyword(self,contains):
         for req in self.requestList:
-            differenceStr = diff.diff(req.content,self.request.content)
+            differenceStr = diff.diff(req.text,self.request.text)
             if contains.lower() in differenceStr.lower():
                 raise vdkException("[medium] Contains keyword: [%s] in diff" % contains)
 

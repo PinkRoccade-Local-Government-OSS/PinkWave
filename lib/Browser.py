@@ -253,30 +253,30 @@ class Browser:
             raise ElementNotFoundException
 
     """
-    Get content from current browser window
+    Get text from current browser window
     """
-    def content(self):
+    def text(self):
         try:
-            content = self.driver.page_source
+            text = self.driver.page_source
         except UnexpectedAlertPresentException:
             #  Double exception handling because Selenium might close alert automaticly and might not (on Chrome for example)
             self.request = "GET"
             try:
-                content = self.driver.page_source
+                text = self.driver.page_source
             except UnexpectedAlertPresentException:
                 alert = self.driver.switch_to_alert()
                 alert.accept()
-                content = self.driver.page_source
+                text = self.driver.page_source
         except URLError:
             print "Connection refused for url: %s" % self.url()
             raise
-        return content
+        return text
 
     """
-    Get size in bytes of current browser window content
+    Get size in bytes of browser text
     """
     def byteSize(self):
-        return len(self.content())
+        return len(self.text())
 
     """
     Get current URL from browser
@@ -325,11 +325,11 @@ class Browser:
         return self.timeEnd - self.timeStart
 
     """
-    Get sha256 hash of the current URL content
+    Get sha256 hash of the current URL text
     """
     def hash(self):
         m = hashlib.sha256()
-        m.update(self.content().encode("utf8"))
+        m.update(self.text().encode("utf8"))
         return m.digest().encode("hex")
 
     """

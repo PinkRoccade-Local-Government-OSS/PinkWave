@@ -28,12 +28,13 @@ Clone this repository to your home directory and follow the following steps:
 
 ### 1\. Install dependencies
 ```
-# Install system dependencies
-sudo apt-get install python nmap
-
 # Install python dependencies
-cd pinkwave
-pip install -r requirements.txt
+cd PinkWave
+pip install -r requirements.tx
+
+# (optional) Install cipherscan if you want to use /exploits/sword/cipherscan.py
+cd pw_modules
+git clone https://github.com/mozilla/cipherscan/
 ```
 
 ### 2\. Install webdriver

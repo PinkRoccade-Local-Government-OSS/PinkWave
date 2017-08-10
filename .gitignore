@@ -6,3 +6,5 @@ private/*
 drivers/*
 !drivers/README.md
 virtualenv/
+pw_modules/*
+!pw_modules/__init__.py

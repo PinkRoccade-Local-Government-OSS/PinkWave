@@ -240,7 +240,7 @@ def options_shell(pathToExploit):
         raise Exception("Exploit not found in path: %s" % pathToExploit)
 
     pye = PyExploit(pathToExploit)
-    options = pye.options()
+    options = pye.options
     print "%s[%s]%s > %sshow parameters%s" % (colors.GREEN, pathToExploit, colors.COLOR_END, colors.YELLOW, colors.COLOR_END)
     print ""
     print "Exploit options (%s)" % pathToExploit
@@ -250,6 +250,12 @@ def options_shell(pathToExploit):
         for d in dictArray:
             if d['long'] == "--" + option:
                 print "[--%s] %s" % (option,d['help'])
+    print ""
+    dependencies = pye.dependencies
+    if len(dependencies) != 0:
+        print "Dependencies:"
+        for key in dependencies:
+            print "%s (%s)" % (key,dependencies[key])
     print ""
     print ""
 

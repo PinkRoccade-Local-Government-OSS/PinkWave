@@ -166,8 +166,11 @@ class Util:
 
     """Execute shell command """
     @staticmethod
-    def shell(command):
-        return subprocess.check_output(command, shell=True)
+    def shell(command,ignoreShellErrors=False):
+        end = ""
+        if ignoreShellErrors:
+            end = ";exit 0"
+        return subprocess.check_output(command + end, shell=True)
 
     """Create dir if not exists"""
     @staticmethod

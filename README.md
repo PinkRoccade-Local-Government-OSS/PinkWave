@@ -48,7 +48,6 @@ sudo visudo
 [YOURUSERNAME] ALL = NOPASSWD: /usr/bin/nmap
 ```
 
-
 ## Usage
 
 #### 1\. Execute manual test
@@ -104,7 +103,7 @@ Exploit options (exploits/sword/sqlinjection.py)
 
 #### 5\. Macro interface (-m)
 ```
-./pinkwave.py -m "examples/macros/logmein.py,examples/macros/searchforuser.py"
+/pinkwave.py -m tests/example-macros/logmein.py,tests/example-macros/searchforuser.py
 [*] PinkServer (HTTP server) starting on port: 9000
 Logging in as admin before performing action
 Logged in!

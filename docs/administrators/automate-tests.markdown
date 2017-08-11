@@ -9,34 +9,53 @@
 Example of test JSON file:
 ```
 {
-  "tests" : [
-    {
-      "target" : "learnvuln.loc",
-      "exploits" : [
-          {
-            "exploits" : "exploits/sword/xsslogger.py",
-            "requestNames" : "vuln",
-            "request" : "GET"
-          },
-          {
-            "exploits" : "exploits/sword/linuxpathtraversal.py",
-            "requestNames" : "vuln",
-            "request" : "GET"
-          },
-          {
-            "exploits" : "exploits/sword/commonfiles.py"
-          },
-          {
-            "exploits" : "exploits/sword/cookiesecureflag.py"
-          },
-          {
-            "exploits" : "exploits/sword/cookiehttponlyflag.py"
-          },
-          {
-            "exploits" : "exploits/sword/sslstripping.py"
-          }
-      ]
-    }
+	"tests": [{
+			"target": "learnvuln.loc",
+			"exploits": [{
+					"exploits": "exploits/sword/xsslogger.py",
+					"requestNames": "vuln"
+				},
+				{
+					"exploits": "exploits/sword/linuxpathtraversal.py",
+					"requestNames": "vuln"
+				},
+				{
+					"exploits": "exploits/sword/commonfiles.py"
+				},
+				{
+					"exploits": "exploits/sword/cookiesecureflag.py"
+				},
+				{
+					"exploits": "exploits/sword/cookiehttponlyflag.py"
+				},
+				{
+					"exploits": "exploits/sword/sslstripping.py"
+				}
+			]
+		},
+		{
+			"target": "learnvuln.loc?vuln=login.php",
+			"exploits": [{
+					"exploits": "exploits/sword/bruteforce.py",
+					"requestNames": ["user", "pass"]
+				},
+				{
+					"exploits": "exploits/sword/csrflogin.py",
+					"requestNames": ["user", "pass"],
+					"creds": ["admin", "admin"]
+				},
+				{
+					"exploits": "exploits/sword/sessionregeneration.py",
+					"requestNames": ["user", "pass"],
+					"creds": ["admin", "admin"]
+				},
+				{
+					"exploits": "exploits/sword/csrftokenscan.py"
+				}
+			]
+		}
+
+	]
 }
 ```
 

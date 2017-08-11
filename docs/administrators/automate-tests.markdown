@@ -5,48 +5,73 @@
   <p align="">
     Use automate.py to run exploit scripts via a JSON file. Make sure your installation is complete before using automate.py.
 
+## Usage
+```
+./automate.py [testfile]
+```
 
-Example of test JSON file:
+## Example of JSON test file:
+A test file has a list targets each with their own list of exploits and parameters. Parameters for exploits can be found using pinkwave.py -e [exploitPath].
+
 ```
 {
-  "tests" : [
-    {
-      "target" : "learnvuln.loc",
-      "exploits" : [
-          {
-            "exploits" : "exploits/sword/xsslogger.py",
-            "requestNames" : "vuln",
-            "request" : "GET"
-          },
-          {
-            "exploits" : "exploits/sword/linuxpathtraversal.py",
-            "requestNames" : "vuln",
-            "request" : "GET"
-          },
-          {
-            "exploits" : "exploits/sword/commonfiles.py"
-          },
-          {
-            "exploits" : "exploits/sword/cookiesecureflag.py"
-          },
-          {
-            "exploits" : "exploits/sword/cookiehttponlyflag.py"
-          },
-          {
-            "exploits" : "exploits/sword/sslstripping.py"
-          }
-      ]
-    }
+	"tests": [{
+			"target": "learnvuln.loc",
+			"exploits": [{
+					"exploits": "exploits/sword/xsslogger.py",
+					"requestNames": "vuln"
+				},
+				{
+					"exploits": "exploits/sword/linuxpathtraversal.py",
+					"requestNames": "vuln"
+				},
+				{
+					"exploits": "exploits/sword/commonfiles.py"
+				},
+				{
+					"exploits": "exploits/sword/cookiesecureflag.py"
+				},
+				{
+					"exploits": "exploits/sword/cookiehttponlyflag.py"
+				},
+				{
+					"exploits": "exploits/sword/sslstripping.py"
+				}
+			]
+		},
+		{
+			"target": "learnvuln.loc?vuln=login.php",
+			"exploits": [{
+					"exploits": "exploits/sword/bruteforce.py",
+					"requestNames": ["user", "pass"]
+				},
+				{
+					"exploits": "exploits/sword/csrflogin.py",
+					"requestNames": ["user", "pass"],
+					"creds": ["admin", "admin"]
+				},
+				{
+					"exploits": "exploits/sword/sessionregeneration.py",
+					"requestNames": ["user", "pass"],
+					"creds": ["admin", "admin"]
+				},
+				{
+					"exploits": "exploits/sword/csrftokenscan.py"
+				}
+			]
+		}
+
+	]
 }
 ```
 
-## Parameters
+## Getting parameters
 View the parameters for each exploit by executing pinkwave.py with the -e parameter with the path to the exploit.
 
 For example:
 ```
-cd ~/pinkwave
-python pinkwave.py -e exploits/sword/xsslogger.py
+cd ~/PinkWave
+./pinkwave.py -e exploits/sword/xsslogger.py
 
 ## Will output:
 # [exploits/sword/xsslogger.py] > show parameters
@@ -62,8 +87,8 @@ python pinkwave.py -e exploits/sword/xsslogger.py
 Place your test JSON file in the private directory and specify the path when executing automate.py.
 
 ```
-cd ~/pinkwave
-python automate.py private/tests/yourtestfile.json
+cd ~/PinkWave
+./automate.py tests/testfile.json
 ```
 
 

@@ -27,7 +27,7 @@ All events will be logged in the private/ directory separately for each **target
 
 
 ## Installing
-Clone this repository to your home directory and follow the following steps:
+Clone this repository and follow the following steps:
 
 ### 1\. Install dependencies
 ```

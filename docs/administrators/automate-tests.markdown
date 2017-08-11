@@ -87,8 +87,8 @@ cd ~/PinkWave
 Place your test JSON file in the private directory and specify the path when executing automate.py.
 
 ```
-cd ~/pinkwave
-python automate.py private/tests/yourtestfile.json
+cd ~/PinkWave
+./automate.py tests/testfile.json
 ```
 
 

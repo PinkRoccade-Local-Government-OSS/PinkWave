@@ -5,8 +5,14 @@
   <p align="">
     Use automate.py to run exploit scripts via a JSON file. Make sure your installation is complete before using automate.py.
 
+## Usage
+```
+./automate.py [testfile]
+```
 
-Example of test JSON file:
+## Example of JSON test file:
+A test file has a list targets each with their own list of exploits and parameters. Parameters for exploits can be found using pinkwave.py -e [exploitPath].
+
 ```
 {
 	"tests": [{
@@ -59,13 +65,13 @@ Example of test JSON file:
 }
 ```
 
-## Parameters
+## Getting parameters
 View the parameters for each exploit by executing pinkwave.py with the -e parameter with the path to the exploit.
 
 For example:
 ```
-cd ~/pinkwave
-python pinkwave.py -e exploits/sword/xsslogger.py
+cd ~/PinkWave
+./pinkwave.py -e exploits/sword/xsslogger.py
 
 ## Will output:
 # [exploits/sword/xsslogger.py] > show parameters

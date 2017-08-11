@@ -47,6 +47,12 @@ def directpost(url,requestNames,parameters=[]):
     return r.generateObject()
 
 """
+Set Browser
+"""
+def setBrowser(browser):
+    Request.setBrowser(browser)
+
+"""
 The Request class can be used in an exploit to make a GET/POST request with the Selenium webdriver
 """
 

@@ -33,7 +33,7 @@ Clone this repository and follow the following steps:
 ```
 # Install python dependencies
 cd PinkWave
-pip install -r requirements.tx
+pip install -r requirements.txt
 
 # (optional) Install cipherscan if you want to use /exploits/sword/cipherscan.py
 cd pw_modules

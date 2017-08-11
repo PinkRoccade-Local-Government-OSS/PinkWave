@@ -18,6 +18,7 @@ Learn how to write/test security tests:
 - [Write your first macro](developers/write-macros.markdown)
 - [Setup a vulnerable environment](developers/testing-environment.markdown)
 - [Configure Settings](administrators/configuration.markdown)
+- [Request API]("developers/extensions_request.markdown")
 
 ### For Managers
 Learn how to read and find log files:

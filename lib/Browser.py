@@ -247,10 +247,7 @@ class Browser:
     Api for querying elements by name
     """
     def getElementByName(self,name):
-        try:
-            return self.driver.find_element_by_name(name)
-        except NoSuchElementException:
-            raise ElementNotFoundException
+        return self.driver.find_element_by_name(name)
 
     """
     Get text from current browser window

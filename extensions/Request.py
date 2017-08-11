@@ -6,6 +6,16 @@ Execute browser actions by using the Selenium webdriver
 """
 
 from Util import Util
+from selenium.common.exceptions import NoSuchElementException
+
+def has_element(formname):
+    has_element = False
+    try:
+        has_element = Request.browser.getElementByName(formname)
+    except NoSuchElementException:
+        pass
+
+    return has_element
 
 def do(pentest,parameters=[]):
     if pentest.request.lower() == "post":

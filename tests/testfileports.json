@@ -1,0 +1,17 @@
+{
+  "tests" : [
+    {
+      "target" : "localhost",
+      "exploits" : [
+	{
+          "exploits" : "exploits/sword/portscantcp.py",
+	        "ports" : ["80","3306","9000"]
+        },
+	{
+          "exploits" : "exploits/sword/portscanudp.py",
+	        "ports" : ["53"]
+        }
+      ]
+    }
+  ]
+}

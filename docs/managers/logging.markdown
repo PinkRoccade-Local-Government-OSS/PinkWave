@@ -15,8 +15,8 @@ Logs will be kept separately for each host in the private directory. If your sca
         * report-0.csv
 
 ### Filename format
-- The file format for a log file is "report-{id}.csv". A report id is automaticly generated when testing with automate.py and start at 1. 
-- A report-0.csv is created when using the CLI interface manually.
+- A report-{id}.csv file is created when using automate.py. The report id is automaticly generated when testing with automate.py and start at 1.
+- A report-0.csv file is created when using pinkwave.py.
 
 ### CSV logging format
 Each test will be logged in one line containing the following data fields:

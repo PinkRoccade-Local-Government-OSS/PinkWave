@@ -35,7 +35,7 @@ browser = None
 def get_browser():
     global browser
     if browser is None:
-        browser = Browser().createFromConfig()
+        browser = Browser(Util.getConfig("browser"),Util.getConfig("ssl-verify"),Util.getConfig("timeout"),Util.getConfig("debug"))
 
     return browser
 

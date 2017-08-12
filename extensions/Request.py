@@ -7,6 +7,7 @@ Execute browser actions by using the Selenium webdriver
 
 from Util import Util
 from selenium.common.exceptions import NoSuchElementException
+import time
 
 def has_element(formname):
     has_element = False
@@ -26,6 +27,7 @@ def do(pentest,parameters=[]):
         return get(pentest.target,pentest.requestNames,parameters)
 
 def get(url,requestNames=[], parameters=[]):
+    timeStart = time.time()
     r = Request()
     if len(requestNames) != 0:
         url = Util.transformUrl(url,requestNames, parameters)
@@ -33,18 +35,20 @@ def get(url,requestNames=[], parameters=[]):
     else:
         Request.browser.nav(url)
 
-    return r.generateObject()
+    return r.generateObject(timeStart)
 
 def post(url,requestNames, parameters=[]):
+    timeStart = time.time()
     r = Request()
     Request.browser.nav(url)
     Request.browser.post(requestNames, parameters)
-    return r.generateObject()
+    return r.generateObject(timeStart)
 
 def directpost(url,requestNames,parameters=[]):
+    timeStart = time.time()
     r = Request()
     Request.browser.directPost(url,requestNames,parameters)
-    return r.generateObject()
+    return r.generateObject(timeStart)
 
 """
 Set Browser
@@ -75,14 +79,16 @@ class Request:
     """
     Return Request object
     """
-    def generateObject(self):
+    def generateObject(self,timeStart):
+        endTime = time.time()
+        totalTime = endTime-timeStart
         browser = Request.browser
         if browser is None:
             raise Exception("Browser is not set for Request")
 
         self.hash = browser.hash()
         self.bytes = len(browser.text())
-        self.time = browser.time()
+        self.time = totalTime
         self.text = browser.text()
         self.cookies = browser.cookies()
         self.url = browser.url()

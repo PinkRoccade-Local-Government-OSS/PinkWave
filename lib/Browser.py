@@ -38,20 +38,43 @@ Providing easy and extended control to the Selenium Webdriver API
 """
 class Browser:
 
-    def __init__(self):
+    def __init__(self,browser,verifySsl = True, timeoutInSeconds=8,debugMode = False):
         self.driver = None
-        self.timeout = None
-        self.browser = None
-        self.driverPath = None
-        self.logging = True
-        self.timeStart = 0
-        self.timeEnd = 0
+        self.browser = browser
+        self.verifySsl = verifySsl
         self.request = "GET"
-        bits = platform.architecture()[0]
-        if "64" in bits:
+        self.timeoutInSeconds = timeoutInSeconds
+        self.debugMode = debugMode
+        if "64" in platform.architecture()[0]:
             self.architecture = 64
         else:
             self.architecture = 32
+        self.driverPath = self.getDriverPath(self.browser)
+        if self.browser.lower() == "firefox":
+            fprofile = None
+            if not verifySsl:
+                fprofile = webdriver.FirefoxProfile()
+                fprofile.accept_untrusted_certs = True
+
+            self.driver = webdriver.Firefox(executable_path=self.driverPath,firefox_profile=fprofile)
+        elif self.browser.lower() == "chrome":
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument('--disable-extensions')
+            chrome_options.add_argument('--disable-xss-auditor')
+            if not verifySsl:
+                chrome_options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
+
+            self.driver = webdriver.Chrome(executable_path=self.driverPath,chrome_options=chrome_options)
+        elif self.browser.lower() == "phantomjs":
+            sargs = []
+            if not verifySsl:
+                sargs = ['--ignore-ssl-errors=true', '--ssl-protocol=any']
+
+            self.driver = webdriver.PhantomJS(executable_path=self.driverPath, service_log_path=os.path.devnull,service_args=sargs)
+        else:
+            raise Exception("Browser %s not supported" % browser)
+
+        self.driver.set_page_load_timeout(self.timeoutInSeconds)
         Request.setBrowser(self)
 
     """
@@ -96,97 +119,46 @@ class Browser:
             raise Exception("Can't load Pinkwave Driver File: %s" % root)
         return root
 
-    """
-    Create browser object with all variables
-    """
-    def create(self, browser):
-        driverPath = self.getDriverPath(browser)
 
-        if Util.getConfig("debug"):
-            print "loading %s browser (driver:%s)" % (browser, driverPath)
-
-        if browser.lower() == "firefox":
-            fprofile = None
-            if not Util.getConfig("ssl-verify"):
-                fprofile = webdriver.FirefoxProfile()
-                fprofile.accept_untrusted_certs = True
-
-            self.driver = webdriver.Firefox(firefox_profile=fprofile)
-        elif browser.lower() == "chrome":
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument('--disable-extensions')
-            chrome_options.add_argument('--disable-xss-auditor')
-            if not Util.getConfig("ssl-verify"):
-                chrome_options.add_experimental_option("excludeSwitches", ["ignore-certificate-errors"])
-
-            self.driver = webdriver.Chrome(executable_path=driverPath,chrome_options=chrome_options)
-        elif browser.lower() == "phantomjs":
-            sargs = []
-            if not Util.getConfig("ssl-verify"):
-                sargs = ['--ignore-ssl-errors=true', '--ssl-protocol=any']
-
-            self.driver = webdriver.PhantomJS(driverPath, service_log_path=os.path.devnull,service_args=sargs)
-
-        self.browser = browser
-        self.driverPath = driverPath
-        self.driver.set_page_load_timeout(Util.getConfig("timeout"))
-        return self
-
-    """
-    Create browser object with variables based on config file
-    """
-    def createFromConfig(self):
-        browser = Util.getConfig("browser")
-        return self.create(browser)
 
     """
     Navigate to URL into browser
     """
     def nav(self,url):
-        self.driver.set_page_load_timeout(Util.getConfig("timeout"))
+        self.driver.set_page_load_timeout(self.timeoutInSeconds)
         if "://" not in url:
             url = "http://" + url
 
         if not Http.is_ok_get(url):
             raise Exception("Failed to establish connection to url %s" % url)
 
-        if Util.getConfig("debug"):
+        if self.debugMode:
             print "%sNavigating to %s%s" % ('\033[1;35m',url,'\033[0m')
 
         try:
             self.request = "GET"
-            self.timeStart = time.time()
             self.driver.get(url)
-            self.timeEnd = time.time()
         except UnexpectedAlertPresentException:
             #  Double exception handling because Selenium might close alert automaticly and might not (on Chrome for example)
             self.request = "GET"
             try:
-                self.timeStart = time.time()
                 self.driver.get(url)
-                self.timeEnd = time.time()
             except UnexpectedAlertPresentException:
-                self.timeStart = time.time()
                 alert = self.driver.switch_to_alert()
                 alert.accept()
                 self.driver.get(url)
-                self.timeEnd = time.time()
         except TimeoutException as t:
-            self.timeEnd = time.time()
             raise vdkException("timeout triggered by webdriver");
 
     """
     Submits POST form to remote URL via bouncer
     """
     def directPost(self,url,requestNames,values):
-        configFile = abspath(appDir + "/config/localhost.json")
         bouncer = Util.getBouncer()
         newUrl = Util.transformUrl(bouncer,["values",'url'],[",".join(requestNames),url])
         self.nav(newUrl)
-        self.timeStart = time.time()
         self.post(requestNames,values)
         self.request = "POST/DIRECT"
-        self.timeEnd = time.time()
 
     """
     Enter and submit POST form to current url
@@ -199,12 +171,11 @@ class Browser:
             raise Exception("values is empty")
 
         try:
-            self.driver.set_page_load_timeout(Util.getConfig("timeout"))
-            self.timeStart = time.time()
+            self.driver.set_page_load_timeout(self.timeoutInSeconds)
             e = None
 
             self.request = "POST"
-            if Util.getConfig("debug"):
+            if self.debugMode:
                 print "Posting to %s, fields: [%s], data: [%s]" % (self.url(), requestNames, values)
 
             if not isinstance(values,list):
@@ -226,7 +197,6 @@ class Browser:
                     postIndex = postIndex + 1
 
             self.hitSubmit(e)
-            self.timeEnd = time.time()
         except TimeoutException as t:
             raise vdkTimeoutException("Timeout triggered by WebDriver");
         except NoSuchElementException as nse:

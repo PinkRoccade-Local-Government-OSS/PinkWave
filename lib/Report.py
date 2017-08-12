@@ -17,28 +17,15 @@ appDir = dirname(dirname(__file__ ))
 sys.path.append(appDir)
 from extensions.Util import Util,vdkException
 
-lock = threading.Lock()
-
-""" Thread safe way to write to log file """
-def write_to_file(file, text):
-    if isinstance(text, unicode):
-        text = text.encode('utf8')
-
-    f = open(file, 'a+')
-    text = text.strip(os.linesep)
-    lock.acquire() # thread blocks at this line until it can obtain lock
-    # in this section, only one thread can be present at a time.
-    print >> f, text
-    lock.release()
-
 class Report:
 
-    def __init__(self, pyExploit,message):
+    def __init__(self, pyExploit,message,totalTime):
         self.pentest = pyExploit.pentest
         self.browser = pyExploit.pentest.browser
         self.exploit = pyExploit.exploitPath
         self.exploitName = basename(self.exploit).split(".")[0]
         self.message = message
+        self.totalTime = totalTime
         self.request = pyExploit.pentest.browser.request
         self.requestNames = pyExploit.pentest.requestNames
         self.labels = pyExploit.labels
@@ -59,7 +46,7 @@ class Report:
         # Creating report folder default folder structure within host
         reportDir = Util.getReportDir(self.pentest.target)
         Util.createDir(reportDir)
-        reportFile = self.getReportsPath(reportDir)
+        reportFile = "%s/report-%s.csv" % (reportDir, self.pentest.reportId)
 
         # Generating report data
         today = datetime.today()
@@ -86,23 +73,26 @@ class Report:
         my_list.append(("Request Type",self.browser.request.upper()))
         my_list.append(("Parameters",self.pentest.parameters()))
         my_list.append(("Comment",self.message))
-        my_list.append(("Time",self.browser.time()))
+        my_list.append(("Time",self.totalTime))
         my_list.append(("Length",byteSize))
         my_list.append(("Cookies",cookies))
-        if not isfile(reportFile):
-            header = ""
+
+        exists = isfile(reportFile)
+        f = open(reportFile,'a+')
+        try:
+            if not exists:
+                header = ""
+                for li in my_list:
+                    header += '"' + Util.escapeQuotes(li[0]) + '",'
+
+                header = header.strip(",")
+                f.write(header + os.linesep)
+
+            log = ""
             for li in my_list:
-                header += '"' + Util.escapeQuotes(li[0]) + '",'
+                log += '"' + Util.escapeQuotes(li[1]) + '",'
 
-            header = header.strip(",")
-            write_to_file(reportFile, header)
-
-        log = ""
-        for li in my_list:
-            log += '"' + Util.escapeQuotes(li[1]) + '",'
-
-        log = log.strip(",")
-        write_to_file(reportFile, log)
-
-    def getReportsPath(self,reportDir):
-        return "%s/report-%s.csv" % (reportDir, self.pentest.reportId)
+            log = log.strip(",")
+            f.write(log + os.linesep)
+        finally:
+            f.close()

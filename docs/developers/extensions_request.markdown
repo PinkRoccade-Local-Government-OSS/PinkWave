@@ -4,10 +4,9 @@ Request Extension
 Request.py like API for the Selenium browser:
 
 ```
->>> from lib.Browser import Browser
 >>> import extensions.Request as Request
->>> b = Browser().createFromConfig()
->>> Request.setBrowser(b)
+>>> from lib.Browser import Browser
+>>> b = Browser().create("chrome")
 >>> r = Request.get("https://google.com")
 >>> r.cookies
 "[{u'domain': u'.google.nl', u'name': u'NID', u'expires': u'za, 10 feb. 2018 12:15:07 GMT', u'value': u'109=V-vYRUq028zZzc2HcQjnx7fcfL0xnTFSqwJ9Zgb2xKp7_uutC84Bck1daE5b41A8DhvQQsKaVywL-bUXQ47n38X1llQIupgUeueyK7rFbQYKcbF1txt8xwVNz1t31P0X', u'expiry': 1518264907, 'httpOnly': False, u'path': u'/', u'httponly': True, u'secure': False}]"
@@ -18,6 +17,9 @@ large html snippet
 ...
 "
 ```
+
+**Note**:
+If you're using the Request extension within an exploit script the Browser is already set. Please don't load another browser, PinkWave can't handle multiple instances of Browser objects.
 
 ## get(url,requestNames=[],parameters=[])
 Navigate to URL with optional parameters.
@@ -61,7 +63,9 @@ large html snippet
 
 
 ## directpost(url,requestNames=[],parameters=[])
-Submit a direct post request via Selenium. (for CSRF testing)
+Submit a direct post request via Selenium. (for CSRF testing). 
+
+**Note**: PinkServer (defaul port 9000) need to be running. This is automaticly handled when using directpost within an exploit script. 
 
 |  |  |
 |--|--|
@@ -71,7 +75,7 @@ Submit a direct post request via Selenium. (for CSRF testing)
 
 login to website:
 ```
->>> r = Request.post("http://httpbin.org/post",['usernameOrEmail','password'],['myusername','mypassword'])
+>>> r = Request.directpost("http://httpbin.org/post",['usernameOrEmail','password'],['myusername','mypassword'])
 >>> r.text
 ...
 large html snippet

@@ -6,7 +6,7 @@ Request.py like API for the Selenium browser:
 ```
 >>> import extensions.Request as Request
 >>> from lib.Browser import Browser
->>> b = Browser().create("chrome")
+>>> b = Browser("chrome")
 >>> r = Request.get("https://google.com")
 >>> r.cookies
 "[{u'domain': u'.google.nl', u'name': u'NID', u'expires': u'za, 10 feb. 2018 12:15:07 GMT', u'value': u'109=V-vYRUq028zZzc2HcQjnx7fcfL0xnTFSqwJ9Zgb2xKp7_uutC84Bck1daE5b41A8DhvQQsKaVywL-bUXQ47n38X1llQIupgUeueyK7rFbQYKcbF1txt8xwVNz1t31P0X', u'expiry': 1518264907, 'httpOnly': False, u'path': u'/', u'httponly': True, u'secure': False}]"

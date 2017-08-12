@@ -4,10 +4,7 @@
 The Report class is used by Pentest to create a report of found vulnerabilities and tests using thread safe file writing.
 """
 
-import sys,os
-import time
-import math
-import threading
+import sys,os,time,math,threading
 from os.path import isfile,abspath,dirname,basename
 from datetime import datetime
 from urllib2 import URLError

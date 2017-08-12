@@ -1,15 +1,14 @@
 #!/usr/bin/python
 
 """
-pinkwave.py is an interface which can be used to create and execute a pentest with parameters
-usage ./pinkwave.py [options]
+PinkWave is a pentesting tool for linux which can be used to test (web)servers with Python scripts and Selenium.
+
+usage ./pinkwave.py -t [target] -e [pathToExploit] [parameters]
 
 for a full list, start help:
 ./pinkwave.py --help
 
-example:
-
-./pinkwave.py -t localhost -e exploits/sword/csrftokenscan.py
+use automate.py if you would like to run multiple tests via a JSON file.
 """
 
 # Importing external libs
@@ -250,9 +249,9 @@ def options_shell(pathToExploit):
         for d in dictArray:
             if d['long'] == "--" + option:
                 print "[--%s] %s" % (option,d['help'])
-    print ""
     dependencies = pye.dependencies
     if len(dependencies) != 0:
+        print ""
         print "Dependencies:"
         for key in dependencies:
             print "%s (%s)" % (key,dependencies[key])

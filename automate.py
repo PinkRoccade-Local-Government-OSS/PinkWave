@@ -1,10 +1,10 @@
 #!/usr/bin/python
 """
-automate.py is an interface which can be used to create and execute a pentest from a JSON testFile
+automate.py can execute multiple tests based on a JSON file
 
-usage ./automate.py [file]
+usage ./automate.py [testfile]
 
-Please refer to the documentation(TestFiles) to see the format of the test file.
+Please read to the docs/ to see the format of the test file.
 
 example:
 

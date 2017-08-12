@@ -17,10 +17,10 @@ if Util.getConfig("ssl-verify") != True:
 """
 Verify if status is 200/201 (OK) with HEAD request
 """
-def is_ok(url):
+def is_ok(url,auth=None):
     result = False
     try:
-        response = head(url)
+        response = head(url,auth)
         result = response.status_code == 200 or response.status_code == 201
     except ConnectionError:pass
     return result
@@ -28,10 +28,10 @@ def is_ok(url):
 """
 Verify if status is 200/201 (OK) with GET request
 """
-def is_ok_get(url):
+def is_ok_get(url,auth=None):
     result = False
     try:
-        response = get(url)
+        response = get(url,auth)
         result = response.status_code == 200 or response.status_code == 201
     except ConnectionError:pass
     return result
@@ -39,10 +39,10 @@ def is_ok_get(url):
 """
 Verify if status is 404 (Not Found)
 """
-def is_not_found(url):
+def is_not_found(url,auth=None):
     result = False
     try:
-        response = head(url)
+        response = head(url,auth)
         result = response.status_code == 404
     except ConnectionError:
         result = True
@@ -52,14 +52,14 @@ def is_not_found(url):
 """
 Verify if a header is present
 """
-def has_header(url,header):
-    return header in headers(url)
+def has_header(url,header,auth=None):
+    return header in headers(url,auth)
 
 """
 Get headers with HEAD request
 """
-def headers(url):
-    response = head(url)
+def headers(url,auth = None):
+    response = head(url,auth)
     return response.headers
 
 """
@@ -72,69 +72,27 @@ def get(url,auth = None):
 """
 Get request
 """
-def post(url,dataDict):
+def post(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.post(url,verify=verify,data=dataDict)
+    return requests.post(url,verify=verify,data=data,auth=auth)
 
 """
 Get request
 """
-def delete(url,dataDict):
+def delete(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.delete(url, verify=verify,data=dataDict)
+    return requests.delete(url, verify=verify,data=data,auth=auth)
 
 """
 Get request
 """
-def put(url,dataDict):
+def put(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.put(url, verify=verify,data=dataDict)
+    return requests.put(url, verify=verify,data=data,auth=auth)
 
 """
 Head request
 """
-def head(url):
+def head(url,auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.head(url, verify=verify)
-
-"""
-Options request
-"""
-def options(url):
-    verify = Util.getConfig("ssl-verify") == True
-    return requests.options(url, verify=verify)
-
-if __name__ == '__main__':
-    from unittest import TestCase
-    from unittest import main
-
-    class testCalc(TestCase):
-        def test_ExistingUrl(self):
-            url = "https://badssl.com"
-            self.assertTrue(is_ok(url))
-            self.assertFalse(is_not_found(url))
-
-        def test_hasHSTSHeaders(self):
-            url = "https://hsts.badssl.com/"
-            result = has_header(url, "Strict-Transport-Security")
-            self.assertTrue(result)
-
-        def test_NonExistingSite(self):
-            url = "http://someweirdurlthatnotexists.com"
-            self.assertTrue(is_not_found(url))
-            self.assertFalse(is_ok(url))
-
-        def test_NonExistingUrl(self):
-            url = "https://reddit.com/iuadhiuadshuadsihi"
-            self.assertFalse(is_ok(url))
-
-        def test_has_headers(self):
-            url = "https://badssl.com"
-            result = has_header(url,"Content-Type")
-            self.assertTrue(result)
-
-        def test_hasNoHSTSHeaders(self):
-            url = "https://subdomain.preloaded-hsts.badssl.com/"
-            result = has_header(url, "Strict-Transport-Security")
-            self.assertFalse(result)
-    main()
+    return requests.head(url, verify=verify,auth=auth)

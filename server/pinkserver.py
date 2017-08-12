@@ -16,7 +16,6 @@ class MyHandler(BaseHTTPRequestHandler):
         pass
 
     def do_GET(self):
-
         # Set headers
         self.send_response(200)
         self.send_header("Content-type", "text/html")

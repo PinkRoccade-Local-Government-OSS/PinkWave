@@ -62,6 +62,7 @@ large html snippet
 
 ## directpost(url,requestNames=[],parameters=[])
 Submit a direct post request via Selenium. (for CSRF testing)
+
 |  |  |
 |--|--|
 | **url** (string) | the target |

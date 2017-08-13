@@ -19,6 +19,7 @@ Learn how to write/test security tests:
 - [Setup a vulnerable environment](developers/testing-environment.markdown)
 - [Configure Settings](administrators/configuration.markdown)
 - [Request Extension API](developers/extensions_request.markdown)
+- [HTTP Extension API](developers/extensions_http.markdown)
 
 ### For Managers
 Learn how to read and find log files:

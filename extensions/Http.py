@@ -20,7 +20,7 @@ Verify if status is 200/201 (OK) with GET request
 def is_ok(url,auth=None):
     result = False
     try:
-        response = get(url,auth)
+        response = get(url,auth=auth)
         result = response.status_code == 200 or response.status_code == 201
     except ConnectionError:pass
     return result
@@ -31,7 +31,7 @@ Verify if status is 200/201 (OK) with HEAD request
 def is_ok_head(url,auth=None):
     result = False
     try:
-        response = head(url,auth)
+        response = head(url,auth=auth)
         result = response.status_code == 200 or response.status_code == 201
     except ConnectionError:pass
     return result
@@ -42,7 +42,7 @@ Verify if status is 404 (Not Found) with GET request
 def is_not_found(url,auth=None):
     result = False
     try:
-        response = get(url,auth)
+        response = get(url,auth=auth)
         result = response.status_code == 404
     except ConnectionError:
         result = True
@@ -54,7 +54,7 @@ Verify if status is 404 (Not Found) with HEAD request
 def is_not_found_head(url,auth=None):
     result = False
     try:
-        response = head(url,auth)
+        response = head(url,auth=auth)
         result = response.status_code == 404
     except ConnectionError:
         result = True
@@ -71,7 +71,7 @@ def has_header(url,header,auth=None):
 Get headers with GET request
 """
 def headers(url,auth = None):
-    response = get(url,auth)
+    response = get(url,auth=auth)
     return response.headers
 
 """
@@ -92,32 +92,32 @@ Get request
 """
 def get(url,auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.get(url, verify=verify,auth=auth)
+    return requests.get(url, verify=verify,auth=auth,timeout=Util.getConfig("timeout"))
 
 """
 Get request
 """
 def post(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.post(url,verify=verify,data=data,auth=auth)
+    return requests.post(url,verify=verify,data=data,auth=auth,timeout=Util.getConfig("timeout"))
 
 """
 Get request
 """
 def delete(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.delete(url, verify=verify,data=data,auth=auth)
+    return requests.delete(url, verify=verify,data=data,auth=auth,timeout=Util.getConfig("timeout"))
 
 """
 Get request
 """
 def put(url,data = {},auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.put(url, verify=verify,data=data,auth=auth)
+    return requests.put(url, verify=verify,data=data,auth=auth,timeout=Util.getConfig("timeout"))
 
 """
 Head request
 """
 def head(url,auth = None):
     verify = Util.getConfig("ssl-verify") == True
-    return requests.head(url, verify=verify,auth=auth)
+    return requests.head(url, verify=verify,auth=auth,timeout=Util.getConfig("timeout"))

@@ -129,7 +129,7 @@ class Browser:
         if "://" not in url:
             url = "http://" + url
 
-        if not Http.is_ok_get(url):
+        if not Http.is_ok(url):
             raise Exception("Failed to establish connection to url %s" % url)
 
         if self.debugMode:

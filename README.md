@@ -40,7 +40,7 @@ git clone https://github.com/mozilla/cipherscan/
 ```
 
 ### 2\. Install webdriver
-Read more in [drivers/README.md](https://github.com/PinkRoccadeLG/pinkwave/tree/master/drivers)
+Read more in [drivers/README.md](drivers/)
 
 ### 3\. Allow NMAP as sudo for current user
 ```
@@ -142,7 +142,7 @@ Searching for user Iron Man(1)...
 
 
 ## Documentation
-Read [docs/](https://github.com/PinkRoccadeLG/pinkwave/tree/master/docs) for documentation.
+Read [docs/](docs/) for documentation.
 
 ## Contributing
 You can fork this repository and add your own **exploit** directory, which we can add to this repository. Include the \_\_author\_\_ headers in your python scripts.
@@ -153,4 +153,4 @@ You can fork this repository and add your own **exploit** directory, which we ca
 
 PinkWave is developed for PinkRoccade Local Government and developed by [Maarten Schermer](https://github.com/maartensch) during his security internship in 2016.
 
-Code and documentation copyright 2017 PinkRoccade Local Government. Code released under the [Apache 2 License](https://github.com/PinkRoccadeLG/pinkwave/blob/master/LICENSE). Docs released under [Creative Commons](https://github.com/PinkRoccadeLG/pinkwave/blob/master/docs/LICENSE).
+Code and documentation copyright 2017 PinkRoccade Local Government. Code released under the [Apache 2 License](LICENSE). Docs released under [Creative Commons](docs/LICENSE).

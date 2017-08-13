@@ -15,20 +15,9 @@ if Util.getConfig("ssl-verify") != True:
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 """
-Verify if status is 200/201 (OK) with HEAD request
-"""
-def is_ok(url,auth=None):
-    result = False
-    try:
-        response = head(url,auth)
-        result = response.status_code == 200 or response.status_code == 201
-    except ConnectionError:pass
-    return result
-
-"""
 Verify if status is 200/201 (OK) with GET request
 """
-def is_ok_get(url,auth=None):
+def is_ok(url,auth=None):
     result = False
     try:
         response = get(url,auth)
@@ -37,9 +26,32 @@ def is_ok_get(url,auth=None):
     return result
 
 """
-Verify if status is 404 (Not Found)
+Verify if status is 200/201 (OK) with HEAD request
+"""
+def is_ok_head(url,auth=None):
+    result = False
+    try:
+        response = head(url,auth)
+        result = response.status_code == 200 or response.status_code == 201
+    except ConnectionError:pass
+    return result
+
+"""
+Verify if status is 404 (Not Found) with GET request
 """
 def is_not_found(url,auth=None):
+    result = False
+    try:
+        response = get(url,auth)
+        result = response.status_code == 404
+    except ConnectionError:
+        result = True
+
+    return result
+"""
+Verify if status is 404 (Not Found) with HEAD request
+"""
+def is_not_found_head(url,auth=None):
     result = False
     try:
         response = head(url,auth)
@@ -50,15 +62,28 @@ def is_not_found(url,auth=None):
     return result
 
 """
-Verify if a header is present
+Verify if a header is present with GET request
 """
 def has_header(url,header,auth=None):
     return header in headers(url,auth)
 
 """
-Get headers with HEAD request
+Get headers with GET request
 """
 def headers(url,auth = None):
+    response = get(url,auth)
+    return response.headers
+
+"""
+Verify if a header is present with HEAD request
+"""
+def has_header_head(url,header,auth=None):
+    return header in headers_head(url,auth)
+
+"""
+Get headers with HEAD request
+"""
+def headers_head(url,auth = None):
     response = head(url,auth)
     return response.headers
 

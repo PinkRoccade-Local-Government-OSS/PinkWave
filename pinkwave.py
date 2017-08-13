@@ -64,7 +64,7 @@ def status():
              }
 
     for key in hosts.iterkeys():
-        if Http.is_ok_get(hosts[key]):
+        if Http.is_ok(hosts[key]):
             print "%s[^] %s is up. %s%s" % (colors.GREEN,key,hosts[key],colors.COLOR_END)
         else:
             print "%s[!] %s is down. %s%s" % (colors.RED,key,hosts[key],colors.COLOR_END)

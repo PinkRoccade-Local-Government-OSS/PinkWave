@@ -58,6 +58,7 @@ The power of  HTTP.py:
 
 ## get(url,auth=None)
 Use a GET request to fetch a response from an URL.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -84,6 +85,7 @@ get request with basic auth:
 
 ## post(url,auth=None,data={})
 Use a POST request to fetch a response from an URL.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -118,6 +120,7 @@ post request:
 ```
 ## put(url,auth=None,data={})
 Use a PUT request to fetch a response from an URL.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -153,6 +156,7 @@ put request:
 
 ## delete(url,auth=None,data={})
 Use a DELETE request to fetch a response from an URL.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -186,6 +190,7 @@ delete request:
 ```
 ## head(url,auth=None)
 Use a HEAD request to fetch a response from an URL.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -200,6 +205,7 @@ head request:
 
 # is_ok(url,auth=None)
 Verify that GET request to url response with a status code 200 or 201.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -213,6 +219,7 @@ True
 
 # is_ok_head(url,auth=None)
 Verify that HEAD request to url response with a status code 200 or 201. A HEAD request is faster than GET, but some hosts may block it.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -226,6 +233,7 @@ False
 
 # is_not_found(url,auth=None)
 Verify that GET request to url response with a status code 404 or ConnectionError.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -238,6 +246,7 @@ True
 ```
 # is_not_found_head(url,auth=None)
 Verify that HEAD request to url response with a status code 404 or ConnectionError. A HEAD request is faster than GET, but some hosts may block it.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -251,6 +260,7 @@ True
 
 # has_headers(url,header, auth=None)
 Verify that GET response contains a specific headers.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -265,6 +275,7 @@ True
 
 # has_headers_head(url,header, auth=None)
 Verify that HEAD response contains a specific headers. A HEAD request is faster than GET, but some hosts may block it.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -280,6 +291,7 @@ False
 
 # headers(url, auth=None)
 Get headers from GET response.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -294,6 +306,7 @@ Headers from host:
 
 # headers_head(url, auth=None)
 Get headers from HEAD response. A HEAD request is faster than GET, but some hosts may block it.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -308,6 +321,7 @@ Hosts may block/send different HEAD requests from requests.py:
 ```
 # has_headers_head(url,header, auth=None)
 Verify that HEAD response contains a specific headers. A HEAD request is faster than GET, but some hosts may block it.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |

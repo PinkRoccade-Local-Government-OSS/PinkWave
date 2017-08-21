@@ -7,25 +7,21 @@ PinkWave
 PinkWave is a pentesting tool for linux which can be used to test (web)servers with Python scripts and Selenium.
 
 ## Features
-### Automated pentests using Python + Browsers
+### Automate vulnerability scans using Python + Browsers
 Using the Seleniun Webdriver, PinkWave can use browsers
-like Firefox, Chrome or PhantomJS to perform automated pentests. 
+like Firefox, Chrome or PhantomJS to perform automated vulnerability scans. 
 
-### Use your favorite Python libraries
-Python scripts, called exploits, can control the browser with an easy to use [API](docs/devleopers/extensions/Request.py) to perform actions and report vulnerabilities. You're also free to use any other Python libraries.
+Python scripts can control the browser with an easy to use browser [API](docs/devleopers/extensions_request.markdown) to perform actions and report vulnerabilities.
 
-
-### Define user flows 
-PinkWave acts as a legitimate browser user and can optionally execute a user flow before performing each **exploit** using other python scripts called **macros**, for example you can use a **macro** to login before performing an **exploit**.
+### User flow 
+PinkWave can execute other tasks before performing an '**exploit**' using other python scripts called '**macros**'. Example: use a '**macro**' to login before performing an '**exploit**'.
 
 
 ### Logging
-All events will be logged in the private/ directory separately for each **target**.
+All scans will be logged in the private/ directory separately for each (sub)domain/ip address.
 
 
-
-
-## Installing
+# Installing
 Clone this repository and follow the following steps:
 
 ### 1\. Install dependencies
@@ -42,30 +38,33 @@ git clone https://github.com/mozilla/cipherscan/
 ### 2\. Install webdriver
 Read more in [drivers/README.md](drivers/)
 
-### 3\. Allow NMAP as sudo for current user
+### 3\. Allow `sudo nmap` for current user
+Allow nmap to run as root for your current user to use privileged scans.
+
 ```
-# Open sudoers file to allow sudo nmap
+# Open sudoers file
 sudo visudo
 
 # Append this line and replace [YOURUSERNAME] with your username
 [YOURUSERNAME] ALL = NOPASSWD: /usr/bin/nmap
+# type :wq to exit and save
 ```
 
 ## Usage
 
-#### 1\. Execute manual test
-Use pinkwave.py to execute a single test. Use the exploit interface to view parameters for individuel scripts.  
+#### #1\. Run exploit
+Use pinkwave.py to execute a single exploit. See **#4.** for params.  
 ```
 ./pinkwave.py -t [target] -e [exploit] [params]
 ```
 
-#### 2\. Execute tests via JSON
+#### #2\. Run multiple exploits via JSON
 Use [automate.py](docs/administrators/automate-tests.markdown) to execute multiple tests with a [JSON file](docs/administrators/automate-tests.markdown).
 ```/
 ./automate.py [pathToTestfile]
 ```
 
-#### 3\. Status interface (s)
+#### #3\. Status interface (s)
 View status of the PinkWave tool and test the http-port for XSS audits and POST form generators: 
 ```
 ./pinkwave.py --status
@@ -89,7 +88,7 @@ View status of the PinkWave tool and test the http-port for XSS audits and POST 
 [^] Bouncer is up. http://localhost:9000/bouncer
 ```
 
-#### 4\.  Exploit interface (-e)
+#### #4\.  Exploit interface (-e)
 Use the -e parameter with a path to an exploit to display the parameters.
 
 ```
@@ -104,7 +103,9 @@ Exploit options (exploits/sword/sqlinjection.py)
 [--request] (optional) Specify request type (GET,POST or POST/DIRECT)
 ```
 
-#### 5\. Macro interface (-m)
+#### #5\. Macro interface (-m)
+Use the -m parameter with paths(comma seperated) to execute macros.
+
 ```
 /pinkwave.py -m tests/example-macros/logmein.py,tests/example-macros/searchforuser.py
 [*] PinkServer (HTTP server) starting on port: 9000
@@ -123,7 +124,7 @@ Searching for user Iron Man(1)...
 
 
 
-## Examples of manual testing
+## Examples usage
 **Testing for SSL stripping**:
 ```
 ./pinkwave.py -t localhost -e exploits/sword/sslstripping.py
@@ -136,13 +137,12 @@ Searching for user Iron Man(1)...
 ./pinkwave.py -t localhost -e exploits/sword/portscantcp.py --ports=80,443
 # [!] Exploit detected! (exploits/sword/portscantcp.py)
 # [!] Unexpected open/closed ports: 9000, 443, 53
-
 ```
 
 
 
 ## Documentation
-Read [docs/](docs/) for documentation.
+See [docs/](docs/) for documentation.
 
 ## Contributing
 You can fork this repository and add your own **exploit** directory, which we can add to this repository. Include the \_\_author\_\_ headers in your python scripts.
@@ -150,7 +150,6 @@ You can fork this repository and add your own **exploit** directory, which we ca
 
 
 ## Credits, copyright and license
-
 PinkWave is developed for PinkRoccade Local Government and developed by [Maarten Schermer](https://github.com/maartensch) during his security internship in 2016.
 
 Code and documentation copyright 2017 PinkRoccade Local Government. Code released under the [Apache 2 License](LICENSE). Docs released under [Creative Commons](docs/LICENSE).

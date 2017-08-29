@@ -4,10 +4,10 @@ PinkWave
 ![PinkWave demo](docs/images/demo.png)
 
 
-PinkWave is a pentesting tool for linux which can be used to test (web)servers with Python scripts and Selenium.
+PinkWave is a pentesting tool for linux which can be used to test (web)servers with custom scripts and Selenium.
 
 ## Features
-### Automate vulnerability scans using Python + Browsers
+### Perform custom vulnerability scans using Python + Browsers
 Using the Seleniun Webdriver, PinkWave can use browsers
 like Firefox, Chrome or PhantomJS to perform automated vulnerability scans. 
 

@@ -23,6 +23,7 @@ If you're using the Request extension within an exploit script the Browser is al
 
 ## get(url,requestNames=[],parameters=[])
 Navigate to URL with optional parameters.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |
@@ -45,6 +46,7 @@ hello world:
 
 ## post(url,requestNames=[],parameters=[])
 Use post if you want to submit a form via Selenium.
+
 |  |  |
 |--|--|
 | **url** (string) | the target |

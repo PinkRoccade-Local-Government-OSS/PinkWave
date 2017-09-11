@@ -9,11 +9,11 @@ PinkWave is a pentesting tool for linux which can be used to test (web)servers w
 ## Features
 ### Perform custom vulnerability scans using Python + Browsers
 Using the Seleniun Webdriver, PinkWave can use browsers
-like Firefox, Chrome or PhantomJS to perform automated vulnerability scans. 
+like Firefox, Chrome or PhantomJS to perform automated vulnerability scans.
 
 Python scripts can control the browser with an easy to use browser [API](docs/devleopers/extensions_request.markdown) to perform actions and report vulnerabilities.
 
-### User flow 
+### User flow
 PinkWave can execute other tasks before performing an '**exploit**' using other python scripts called '**macros**'. Example: use a '**macro**' to login before performing an '**exploit**'.
 
 
@@ -65,7 +65,7 @@ Use [automate.py](docs/administrators/automate-tests.markdown) to execute multip
 ```
 
 #### #3\. Status interface (s)
-View status of the PinkWave tool and test the http-port for XSS audits and POST form generators: 
+View status of the PinkWave tool and test the http-port for XSS audits and POST form generators:
 ```
 ./pinkwave.py --status
 [*] PinkServer (HTTP server) starting on port: 9000
@@ -73,17 +73,17 @@ View status of the PinkWave tool and test the http-port for XSS audits and POST 
 
              oo          dP                                             
                          88                                             
-    88d888b. dP 88d888b. 88  .dP  dP  dP  dP .d8888b. dP   .dP .d8888b. 
-    88'  `88 88 88'  `88 88888"   88  88  88 88'  `88 88   d8' 88ooood8 
-    88.  .88 88 88    88 88  `8b. 88.88b.88' 88.  .88 88 .88'  88.  ... 
-    88Y888P' dP dP    dP dP   `YP 8888P Y8P  `88888P8 8888P'   `88888P' 
+    88d888b. dP 88d888b. 88  .dP  dP  dP  dP .d8888b. dP   .dP .d8888b.
+    88'  `88 88 88'  `88 88888"   88  88  88 88'  `88 88   d8' 88ooood8
+    88.  .88 88 88    88 88  `8b. 88.88b.88' 88.  .88 88 .88'  88.  ...
+    88Y888P' dP dP    dP dP   `YP 8888P Y8P  `88888P8 8888P'   `88888P'
     88                                                                  
     dP                                                                  
 
-              -- -- +=[ 322 Payloads 
-              -- -- +=[ 17 Python Scripts 
+              -- -- +=[ 322 Payloads
+              -- -- +=[ 17 Python Scripts
             [W] Make sure your current directory (pwd) is the same as pinkwave.py .
-            
+
 [^] Logger is up. http://localhost:9000/logger
 [^] Bouncer is up. http://localhost:9000/bouncer
 ```
@@ -150,6 +150,6 @@ You can fork this repository and add your own **exploit** directory, which we ca
 
 
 ## Credits, copyright and license
-PinkWave is developed for PinkRoccade Local Government and developed by [Maarten Schermer](https://github.com/maartensch) during his security internship in 2016.
+PinkWave is developed for PinkRoccade Local Government and developed by [sword](https://github.com/swordsecurity) during his security internship in 2016.
 
 Code and documentation copyright 2017 PinkRoccade Local Government. Code released under the [Apache 2 License](LICENSE). Docs released under [Creative Commons](docs/LICENSE).

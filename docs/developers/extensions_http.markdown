@@ -28,7 +28,7 @@ The power of  HTTP.py:
     "Host": "httpbin.org", 
     "User-Agent": "python-requests/2.12.3"
   }, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/get?hello=world"
 }"
 >>> h = Http.post('https://httpbin.org/post',data={'hello':'world'})
@@ -50,7 +50,7 @@ The power of  HTTP.py:
     "User-Agent": "python-requests/2.12.3"
   }, 
   "json": null, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/post"
 }
 "
@@ -78,7 +78,7 @@ get request with basic auth:
     "Host": "httpbin.org", 
     "User-Agent": "python-requests/2.12.3"
   }, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/get"
 }
 ```
@@ -114,7 +114,7 @@ post request:
     "User-Agent": "python-requests/2.12.3"
   }, 
   "json": null, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/post"
 }
 ```
@@ -149,7 +149,7 @@ put request:
     "User-Agent": "python-requests/2.12.3"
   }, 
   "json": null, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/put"
 }
 ```
@@ -184,7 +184,7 @@ delete request:
     "User-Agent": "python-requests/2.12.3"
   }, 
   "json": null, 
-  "origin": "194.171.225.106", 
+  "origin": "[filtered]", 
   "url": "https://httpbin.org/delete"
 }
 ```
